@@ -9,23 +9,43 @@
     "userInterfaceStyle": "automatic",
     "jsEngine": "hermes",
     "newArchEnabled": true,
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 3000,
+      "url": "https://u.expo.dev/63f6a90f-4073-4bd1-be1d-73bcd7f8dce6"
+    },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.yourname.snapshotgrowth",
-      "buildNumber": "1"
+      "bundleIdentifier": "com.skilltech.snapshotgrowth",
+      "usesAppleSignIn": true,
+      "infoPlist": {
+        "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you.",
+        "UIBackgroundModes": ["fetch", "remote-notification"]
+      }
     },
     "android": {
       "package": "com.skilltech.snapshotgrowth",
       "versionCode": 1,
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/icon.png"
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#ffffff"
       },
+      "notifications": {
+        "icon": "./assets/images/icon.png",
+        "color": "#3B82F6",
+        "channelId": "default"
+      },
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "READ_MEDIA_IMAGES",
+        "READ_MEDIA_VIDEO",
+        "READ_MEDIA_AUDIO",
+        "POST_NOTIFICATIONS"
+      ],
       "splash": {
         "backgroundColor": "transparent"
       },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
       "enableProguardInReleaseBuilds": true,
       "jsEngine": "hermes",
       "useNextNotificationsApi": true
@@ -34,25 +54,41 @@
       "output": "static",
       "favicon": "./assets/images/icon.png"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      "expo-notifications",
+      "expo-font",
+      [
+        "expo-updates",
+        {
+          "username": "rahulbarahi.connect"
+        }
+      ]
+    ],
     "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
-    },
-    "updates": {
-      "enabled": true,
-      "checkAutomatically": "ON_LOAD",
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/63f6a90f-4073-4bd1-be1d-73bcd7f8dce6"
+      "typedRoutes": true
     },
     "extra": {
-      "router": {},
+      "router": {
+        "origin": false
+      },
       "eas": {
         "projectId": "63f6a90f-4073-4bd1-be1d-73bcd7f8dce6"
       }
     },
+    "assetBundlePatterns": ["**/*"],
     "runtimeVersion": {
-      "policy": "appVersion"
-    }
+      "policy": "sdkVersion"
+    },
+    "owner": "rahulbarahi.connect"
   }
 }

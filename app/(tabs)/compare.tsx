@@ -3,6 +3,7 @@ import { ThemeContext } from "@/context/ThemeContext";
 import { useTimeline } from "@/context/TimelineContext"; // Add this import
 import { TracksContext } from "@/context/TracksContext";
 import { Feather, FontAwesome5, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   Animated,
@@ -263,7 +264,7 @@ export default function ComparisonScreen() {
               </View>
               <View style={styles.comparisonDivider} />
               <View style={styles.comparisonSide}>
-                <View style={[styles.comparisonTrack, { backgroundColor: rightTrack?.color || '#2196F3' }]}>
+                <View style={[styles.comparisonTrack, { backgroundColor: '#FF9800' }]}>
                   <Text style={styles.comparisonTrackText}>Right: {selectedRightItem.track}</Text>
                 </View>
               </View>
@@ -318,24 +319,43 @@ export default function ComparisonScreen() {
           </ScrollView>
         );
 
-      case "splitView":
-        return (
-          <View style={styles.splitContainer}>
-            <Image
-              source={{ uri: selectedLeftItem.image || 'https://via.placeholder.com/300' }}
-              style={styles.splitImage}
-              resizeMode="cover"
-            />
-            <View style={[styles.splitDivider, { backgroundColor: "#FF9800" }]}>
-              <Text style={styles.splitDividerText}>VS</Text>
-            </View>
-            <Image
-              source={{ uri: selectedRightItem.image || 'https://via.placeholder.com/300' }}
-              style={styles.splitImage}
-              resizeMode="cover"
-            />
-          </View>
-        );
+case "splitView":
+  return (
+    <View style={styles.splitContainer}>
+            {/* Full Screen Button */}
+      <TouchableOpacity
+        style={styles.fullScreenButton}
+        onPress={() => 
+          router.push({
+            pathname: '/splitscreenView',
+            params: {
+              img1: selectedLeftItem.image,
+              img2: selectedRightItem.image,
+            },
+          })
+        }
+      >
+        <Text style={styles.fullScreenButtonText}>Full Screen</Text>
+      </TouchableOpacity>
+      <Image
+        source={{ uri: selectedLeftItem.image || 'https://via.placeholder.com/300' }}
+        style={styles.splitImage}
+        resizeMode="cover"
+      />
+      
+      <View style={[styles.splitDivider, { backgroundColor: "#FF9800" }]}>
+        <Text style={styles.splitDividerText}>VS</Text>
+      </View>
+      
+      <Image
+        source={{ uri: selectedRightItem.image || 'https://via.placeholder.com/300' }}
+        style={styles.splitImage}
+        resizeMode="cover"
+      />
+
+
+    </View>
+  );
 
       case "details":
         return (
@@ -930,6 +950,21 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     width: '100%',
   },
+  
+  fullScreenButton: {
+    position: 'absolute',
+    top: 10,
+    right:10,
+    alignSelf: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    backgroundColor: '#FF9800',
+    borderRadius: 5,
+  },
+  fullScreenButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
   columnIndicator: {
     width: 4,
     height: 20,
@@ -1352,6 +1387,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: 20,
+    paddingVertical:60
   },
   splitImage: {
     flex: 1,
