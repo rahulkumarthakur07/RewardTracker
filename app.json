@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "Snapshot Growth",
+    "slug": "SnapshotGrowth",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "snapshotgrowth",
+    "userInterfaceStyle": "automatic",
+    "jsEngine": "hermes",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourname.snapshotgrowth",
+      "buildNumber": "1"
+    },
+    "android": {
+      "package": "com.skilltech.snapshotgrowth",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/images/icon.png"
+      },
+      "splash": {
+        "backgroundColor": "transparent"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "enableProguardInReleaseBuilds": true,
+      "jsEngine": "hermes",
+      "useNextNotificationsApi": true
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/icon.png"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/63f6a90f-4073-4bd1-be1d-73bcd7f8dce6"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "63f6a90f-4073-4bd1-be1d-73bcd7f8dce6"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
+  }
+}
