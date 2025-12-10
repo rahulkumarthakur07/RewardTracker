@@ -259,7 +259,7 @@ export default function SupportUsScreen() {
         </View>
 
         {/* THANK YOU */}
-        <View style={styles.thankYouSection}>
+        <View className='mb-6' style={styles.thankYouSection}>
           <Ionicons name="sparkles" size={32} color={dark ? '#94a3b8' : '#6b7280'} />
           <Text style={[styles.thankYouTitle, { color: dark ? '#f3f4f6' : '#111827' }]}>
             Thank You!

@@ -24,12 +24,12 @@ export default function AboutUsScreen() {
   ];
 
   const team = [
-    { name: 'Rahul Sharma', role: 'Founder and CEO', avatar: 'https://rahulkumarthakur.com.np/assets/hero-BrZkCehB.png' },
+    { name: 'Rahul Sharma', role: 'Founder and CEO of Xyronix Technologies', avatar: 'https://rahulkumarthakur.com.np/assets/hero-BrZkCehB.png' },
     
   ];
 
   const links = [
-    { icon: 'globe', title: "Developer's Portfoli", url: 'https://rahulkumarthakur.com.np/' },
+    { icon: 'globe', title: "Developer's Portfolio", url: 'https://rahulkumarthakur.com.np/' },
     { icon: 'logo-facebook', title: 'Facebook', url: 'https://www.facebook.com/rahul.sharma.41462' },
 
   ];
@@ -39,7 +39,7 @@ export default function AboutUsScreen() {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: dark ? '#121212' : '#f8fafc' }]}>
+    <SafeAreaView  style={[styles.container, { backgroundColor: dark ? '#121212' : '#f8fafc' }]}>
       {/* HEADER */}
       <View style={[styles.header, { backgroundColor: dark ? '#1a1a1a' : '#ffffff' }]}>
         <View style={styles.headerContent}>
@@ -189,7 +189,7 @@ export default function AboutUsScreen() {
         </View>
 
         {/* FOOTER */}
-        <View style={styles.footer}>
+        <View className='mb-6' style={styles.footer}>
           <Text style={[styles.footerText, { color: dark ? '#94a3b8' : '#6b7280' }]}>
             Made with ❤️ for productive souls
           </Text>

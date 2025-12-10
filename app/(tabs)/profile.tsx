@@ -23,7 +23,7 @@ import { useProfile } from "@/context/ProfileContext";
 import { useTimeline } from "@/context/TimelineContext"; // Add this import
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
-const NUM_COLUMNS = 10;
+const NUM_COLUMNS = 12;
 const GAP = 4;
 const BLOCK_SIZE = (SCREEN_WIDTH - 40 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
 const BLOCK_COUNT = 60;
@@ -791,6 +791,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     marginHorizontal: -GAP / 2,
     marginBottom: 16,
+  alignItems:"center",
+  justifyContent:"center"
   },
   calendarBlock: {
     margin: GAP / 2,

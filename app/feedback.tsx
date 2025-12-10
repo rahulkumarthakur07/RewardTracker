@@ -1,19 +1,19 @@
 // screens/FeedbackScreen.tsx
-import React, { useState, useContext } from 'react';
+import { ThemeContext } from '@/context/ThemeContext';
+import { Ionicons } from '@expo/vector-icons';
+import Slider from '@react-native-community/slider';
+import React, { useContext, useState } from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
+  ActivityIndicator,
+  Alert,
   SafeAreaView,
   ScrollView,
-  TextInput,
   StyleSheet,
-  Alert,
-  ActivityIndicator,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { ThemeContext } from '@/context/ThemeContext';
-import Slider from '@react-native-community/slider';
 
 export default function FeedbackScreen() {
   const { dark } = useContext(ThemeContext);
@@ -246,7 +246,7 @@ export default function FeedbackScreen() {
         </TouchableOpacity>
 
         {/* THANK YOU MESSAGE */}
-        <View style={styles.thankYou}>
+        <View className='mb-6' style={styles.thankYou}>
           <Ionicons name="heart" size={24} color={dark ? '#94a3b8' : '#6b7280'} />
           <Text style={[styles.thankYouText, { color: dark ? '#94a3b8' : '#6b7280' }]}>
             Thank you for helping us improve!
