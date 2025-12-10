@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Snapshot Growth",
-    "slug": "SnapshotGrowth",
+    "slug": "SnapshotGrowth", 
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,18 +15,24 @@
       "fallbackToCacheTimeout": 3000,
       "url": "https://u.expo.dev/63f6a90f-4073-4bd1-be1d-73bcd7f8dce6"
     },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.skilltech.snapshotgrowth",
       "usesAppleSignIn": true,
       "infoPlist": {
         "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you.",
-        "UIBackgroundModes": ["fetch", "remote-notification"]
+        "UIBackgroundModes": [
+          "fetch",
+          "remote-notification"
+        ]
       }
     },
     "android": {
       "package": "com.skilltech.snapshotgrowth",
-      "versionCode": 1,
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
@@ -44,7 +50,7 @@
         "POST_NOTIFICATIONS"
       ],
       "splash": {
-        "backgroundColor": "transparent"
+        "backgroundColor": "#ffffff"
       },
       "enableProguardInReleaseBuilds": true,
       "jsEngine": "hermes",
@@ -70,7 +76,7 @@
       [
         "expo-updates",
         {
-          "username": "rahulbarahi.connect"
+          "projectId": "63f6a90f-4073-4bd1-be1d-73bcd7f8dce6"
         }
       ]
     ],
@@ -85,10 +91,9 @@
         "projectId": "63f6a90f-4073-4bd1-be1d-73bcd7f8dce6"
       }
     },
-    "assetBundlePatterns": ["**/*"],
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "owner": "rahulbarahi.connect"
   }
 }

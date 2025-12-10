@@ -181,16 +181,26 @@ export default function TimelineScreen() {
     return matchesSearch && matchesDate && matchesTrack;
   });
 
-  const groupItemsByDate = () => {
-    const groups = {};
-    filteredItems.forEach(item => {
-      if (!groups[item.date]) {
-        groups[item.date] = [];
-      }
-      groups[item.date].push(item);
-    });
-    return Object.entries(groups).sort((a, b) => b[0].localeCompare(a[0]));
-  };
+const groupItemsByDate = () => {
+  const groups = {};
+
+  filteredItems.forEach(item => {
+    if (!groups[item.date]) groups[item.date] = [];
+    groups[item.date].push(item);
+  });
+
+  return Object.entries(groups).sort((a, b) => {
+    const [monthA, dayA, yearA] = a[0].split("/").map(Number);
+    const [monthB, dayB, yearB] = b[0].split("/").map(Number);
+
+    const dateA = new Date(yearA, monthA - 1, dayA);
+    const dateB = new Date(yearB, monthB - 1, dayB);
+
+    // MOST RECENT FIRST
+    return dateB.getTime() - dateA.getTime();
+  });
+};
+
 
   const renderItem = ({ item }) => {
     const track = tracks.find(t => t.name === item.track);
@@ -323,6 +333,7 @@ export default function TimelineScreen() {
   return (
     <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
       <SafeAreaView  style={{ flex: 1, backgroundColor: dark ? "#121212" : "#f8fafc" , paddingTop:40 }}>
+       <View className="flex-col  w-full" >
         {/* SEARCH & FILTERS */}
         <View style={styles.searchSection}>
           <View style={[styles.searchContainer, { backgroundColor: dark ? "#1a1a1a" : "#ffffff" }]}>
@@ -334,16 +345,8 @@ export default function TimelineScreen() {
               onChangeText={setSearch}
               style={[styles.searchInput, { color: dark ? "#f3f4f6" : "#111827" }]}
             />
-            {(search || selectedDate || selectedTrack !== "All") && (
-              <TouchableOpacity onPress={clearFilters}>
-                <Ionicons name="close-circle" size={20} color={dark ? "#94a3b8" : "#6b7280"} />
-              </TouchableOpacity>
-            )}
-          </View>
-
-          {/* FILTER ROW */}
-          <View style={styles.filterRow}>
-            <TouchableOpacity
+            
+                        <TouchableOpacity
               onPress={() => setShowDatePicker(true)}
               style={[styles.filterButton, { backgroundColor: dark ? "#1a1a1a" : "#ffffff" }]}
             >
@@ -352,6 +355,16 @@ export default function TimelineScreen() {
                 {selectedDate ? selectedDate.toLocaleDateString() : "Any Date"}
               </Text>
             </TouchableOpacity>
+            {(search || selectedDate || selectedTrack !== "All") && (
+              <TouchableOpacity className="pl-2" onPress={clearFilters}>
+                <Ionicons name="close-circle" size={20} color={dark ? "#94a3b8" : "#6b7280"} />
+              </TouchableOpacity>
+            )}
+          </View>
+
+          {/* FILTER ROW */}
+          <View style={styles.filterRow}>
+
 
             <ScrollView 
               horizontal 
@@ -364,7 +377,7 @@ export default function TimelineScreen() {
                   styles.trackFilter,
                   {
                     backgroundColor: selectedTrack === "All" 
-                      ? "#3b82f6" 
+                      ? "#7e00fc" 
                       : dark ? "#262626" : "#f1f5f9",
                   }
                 ]}
@@ -456,7 +469,7 @@ export default function TimelineScreen() {
             }}
           />
         )}
-
+</View>
         {/* TIMELINE LIST */}
         {filteredItems.length === 0 ? (
           <View style={styles.emptyState}>
@@ -475,7 +488,7 @@ export default function TimelineScreen() {
             </Text>
             <TouchableOpacity
               onPress={() => setModalVisible(true)}
-              style={[styles.emptyStateButton, { backgroundColor: "#3b82f6" }]}
+              style={[styles.emptyStateButton, { backgroundColor: "#7e00fc" }]}
             >
               <Text style={styles.emptyStateButtonText}>Add Event</Text>
             </TouchableOpacity>
@@ -512,7 +525,7 @@ export default function TimelineScreen() {
             {
               backgroundColor: dark ? "#1a1a1a" : "#ffffff", // background adapts to theme
               borderWidth: 1,
-              borderColor: "#3b82f6", // light blue outline
+              borderColor: "#7e00fc", // light blue outline
               flexDirection: "row",
               paddingHorizontal: 20,
               paddingVertical: 12,
@@ -526,10 +539,10 @@ export default function TimelineScreen() {
           onPress={() => setModalVisible(true)}
           activeOpacity={0.9}
         >
-          <Ionicons name="add" size={24} color="#3b82f6" />
+          <Ionicons name="add" size={24} color="#7e00fc" />
           <Text
             style={{
-              color: "#3b82f6",
+              color: "#7e00fc",
               fontWeight: "600",
               marginLeft: 8,
               fontSize: 16,
@@ -670,7 +683,7 @@ export default function TimelineScreen() {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={addEvent}
-                  style={[styles.addButton, { backgroundColor: "#3b82f6" }]}
+                  style={[styles.addButton, { backgroundColor: "#7e00fc" }]}
                 >
                   <Ionicons name="checkmark" size={20} color="#ffffff" />
                   <Text style={styles.addButtonText}>Add Event</Text>
@@ -834,9 +847,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingVertical: 10,
+    paddingVertical:6,
     borderRadius: 12,
-    marginBottom: 12,
+
     ...Platform.select({
       ios: {
         shadowColor: '#000',

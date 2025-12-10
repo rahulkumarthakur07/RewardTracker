@@ -63,7 +63,7 @@ export default function SupportUsScreen() {
       title: 'Share the App',
       description: 'Tell your friends about us',
       icon: 'share-social',
-      color: '#3B82F6',
+      color: '#7e00fc',
     },
     {
       title: 'Rate Us',
@@ -192,7 +192,7 @@ export default function SupportUsScreen() {
           style={[
             styles.supportButton,
             { 
-              backgroundColor: '#3b82f6',
+              backgroundColor: '#7e00fc',
               opacity: loading ? 0.5 : 1
             }
           ]}

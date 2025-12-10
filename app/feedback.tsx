@@ -28,7 +28,7 @@ export default function FeedbackScreen() {
   const feedbackTypes = [
     { id: 'bug', label: 'Bug Report', icon: 'bug-outline', color: '#EF4444' },
     { id: 'suggestion', label: 'Suggestion', icon: 'bulb-outline', color: '#F59E0B' },
-    { id: 'feature', label: 'Feature Request', icon: 'rocket-outline', color: '#3B82F6' },
+    { id: 'feature', label: 'Feature Request', icon: 'rocket-outline', color: '#7e00fc' },
     { id: 'other', label: 'Other', icon: 'chatbox-outline', color: '#8B5CF6' },
   ];
 
@@ -229,7 +229,7 @@ export default function FeedbackScreen() {
           style={[
             styles.submitButton,
             { 
-              backgroundColor: '#3b82f6',
+              backgroundColor: '#7e00fc',
               opacity: loading || !feedback.message.trim() ? 0.5 : 1
             }
           ]}

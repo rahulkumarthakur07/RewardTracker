@@ -1,17 +1,17 @@
 // screens/AboutUsScreen.tsx
+import { ThemeContext } from '@/context/ThemeContext';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import React, { useContext } from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
+  Image,
+  Linking,
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Linking,
-  Image,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
-import { ThemeContext } from '@/context/ThemeContext';
 
 export default function AboutUsScreen() {
   const { dark } = useContext(ThemeContext);
@@ -56,7 +56,7 @@ export default function AboutUsScreen() {
         {/* HERO SECTION */}
         <View style={[styles.heroCard, { backgroundColor: dark ? '#1a1a1a' : '#ffffff' }]}>
           <View style={styles.appLogo}>
-            <Ionicons name="time" size={48} color="#3b82f6" />
+            <Ionicons name="time" size={48} color="#7e00fc" />
           </View>
           <Text style={[styles.appName, { color: dark ? '#f3f4f6' : '#111827' }]}>
             Timeline Tracker
@@ -80,8 +80,8 @@ export default function AboutUsScreen() {
                 key={index}
                 style={[styles.featureCard, { backgroundColor: dark ? '#1a1a1a' : '#ffffff' }]}
               >
-                <View style={[styles.featureIcon, { backgroundColor: '#3b82f6' + '20' }]}>
-                  <MaterialIcons name={feature.icon} size={24} color="#3b82f6" />
+                <View style={[styles.featureIcon, { backgroundColor: '#7e00fc' + '20' }]}>
+                  <MaterialIcons name={feature.icon} size={24} color="#7e00fc" />
                 </View>
                 <Text style={[styles.featureTitle, { color: dark ? '#f3f4f6' : '#111827' }]}>
                   {feature.title}
@@ -120,8 +120,9 @@ export default function AboutUsScreen() {
 >
   <View style={styles.avatar}>
     <Image 
+    className='rounded-full mb-6'
       source={{ uri: member.avatar }} 
-      style={{ width: 50, height: 50, borderRadius: 25 }} // adjust size as needed
+      style={{ width: 100, height: 100 }} // adjust size as needed
     />
   </View>
   <Text style={[styles.teamName, { color: dark ? '#f3f4f6' : '#111827' }]}>
@@ -179,7 +180,7 @@ export default function AboutUsScreen() {
           </Text>
           <TouchableOpacity
             onPress={() => Linking.openURL('mailto:rahulbarahi.connect@gmail.com')}
-            style={[styles.contactButton, { backgroundColor: '#3b82f6' }]}
+            style={[styles.contactButton, { backgroundColor: '#7e00fc' }]}
             activeOpacity={0.7}
           >
             <Ionicons name="mail" size={20} color="#ffffff" />
@@ -250,7 +251,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#3b82f6' + '20',
+    backgroundColor: '#7e00fc' + '20',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
@@ -335,7 +336,7 @@ const styles = StyleSheet.create({
   teamCard: {
     flex: 1,
     minWidth: '45%',
-    padding: 20,
+    padding: 40,
     borderRadius: 16,
     alignItems: 'center',
     shadowColor: '#000',
@@ -355,6 +356,7 @@ const styles = StyleSheet.create({
   },
   avatarText: {
     fontSize: 32,
+    padding:8
   },
   teamName: {
     fontSize: 16,

@@ -145,7 +145,7 @@ export default function Profile() {
   const generateRandomColor = () => {
     const colors = [
       "#EF4444", "#F97316", "#F59E0B", "#10B981", "#06B6D4",
-      "#3B82F6", "#8B5CF6", "#EC4899", "#6366F1", "#14B8A6",
+      "#3B82F6", "#8B5CF6", "#EC4899", "#7e00fc", "#14B8A6",
     ];
     return colors[Math.floor(Math.random() * colors.length)];
   };
@@ -260,7 +260,7 @@ export default function Profile() {
           {/* STATS GRID */}
           <View style={styles.statsGrid}>
             <View style={[styles.statCard, { backgroundColor: dark ? "#262626" : "#f1f5f9" }]}>
-              <View style={[styles.statIcon, { backgroundColor: "#3b82f6" }]}>
+              <View style={[styles.statIcon, { backgroundColor: "#7e00fc" }]}>
                 <Ionicons name="checkmark-circle" size={20} color="#ffffff" />
               </View>
               <Text style={[styles.statNumber, { color: dark ? "#f8fafc" : "#1e293b" }]}>
@@ -303,7 +303,7 @@ export default function Profile() {
           style={[styles.addTrackCta, { backgroundColor: dark ? "#1a1a1a" : "#ffffff" }]}
         >
           <View style={styles.addTrackContent}>
-            <View style={[styles.addTrackIcon, { backgroundColor: "#3b82f6" }]}>
+            <View style={[styles.addTrackIcon, { backgroundColor: "#7e00fc" }]}>
               <Ionicons name="add" size={24} color="#ffffff" />
             </View>
             <View style={styles.addTrackText}>
@@ -476,7 +476,7 @@ export default function Profile() {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={createTrack}
-                style={[styles.createButton, { backgroundColor: "#3b82f6" }]}
+                style={[styles.createButton, { backgroundColor: "#7e00fc" }]}
                 disabled={!newTrackName.trim()}
               >
                 <Text style={styles.createButtonText}>
@@ -599,7 +599,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     borderWidth: 4,
-    borderColor: '#3b82f6',
+    borderColor: '#7e00fc',
   },
   profileInfo: {
     marginLeft: 16,

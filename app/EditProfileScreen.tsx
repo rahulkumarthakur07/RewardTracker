@@ -87,7 +87,7 @@ const handleSave = async () => {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: dark ? '#121212' : '#f8fafc' }]}>
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={dark ? '#60a5fa' : '#3b82f6'} />
+          <ActivityIndicator size="large" color={dark ? '#60a5fa' : '#7e00fc'} />
           <Text style={[styles.loadingText, { color: dark ? '#94a3b8' : '#6b7280' }]}>
             Loading profile...
           </Text>
@@ -106,9 +106,9 @@ const handleSave = async () => {
           </Text>
           <TouchableOpacity onPress={handleSave} disabled={isSaving || !profile}>
             {isSaving ? (
-              <ActivityIndicator color={dark ? '#60a5fa' : '#3b82f6'} />
+              <ActivityIndicator color={dark ? '#60a5fa' : '#7e00fc'} />
             ) : (
-              <Text style={[styles.saveButton, { color: dark ? '#60a5fa' : '#3b82f6' }]}>
+              <Text style={[styles.saveButton, { color: dark ? '#60a5fa' : '#7e00fc' }]}>
                 Save
               </Text>
             )}
@@ -337,13 +337,13 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 60,
     borderWidth: 4,
-    borderColor: '#3b82f6',
+    borderColor: '#7e00fc',
   },
   imageOverlay: {
     position: 'absolute',
     bottom: 0,
     right: 0,
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#7e00fc',
     width: 40,
     height: 40,
     borderRadius: 20,

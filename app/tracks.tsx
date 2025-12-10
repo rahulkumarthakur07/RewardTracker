@@ -33,7 +33,7 @@ export default function ManageTracksScreen() {
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const [trackForm, setTrackForm] = useState({
     name: '',
-    color: '#3b82f6',
+    color: '#7e00fc',
   });
   const [stats, setStats] = useState<Record<string, number>>({});
 
@@ -59,7 +59,7 @@ export default function ManageTracksScreen() {
 
   const colors = [
     '#EF4444', '#F97316', '#F59E0B', '#10B981', '#06B6D4',
-    '#3B82F6', '#8B5CF6', '#EC4899', '#6366F1', '#14B8A6',
+    '#3b82f6', '#8B5CF6', '#EC4899', '#6366F1', '#14B8A6',
     '#84CC16', '#F43F5E', '#0EA5E9', '#8B5CF6', '#EC4899',
   ];
 
@@ -79,7 +79,7 @@ const handleAddTrack = async () => {
     // Reload stats after adding
     await loadTrackStats();
     
-    setTrackForm({ name: '', color: '#3b82f6' });
+    setTrackForm({ name: '', color: '#7e00fc' });
     setModalVisible(false);
   } catch (error: any) {
     Alert.alert('Error', error.message);
@@ -102,7 +102,7 @@ const handleEditTrack = async () => {
     // IMPORTANT: Reload stats after updating track name
     await loadTrackStats();
     
-    setTrackForm({ name: '', color: '#3b82f6' });
+    setTrackForm({ name: '', color: '#7e00fc' });
     setEditModalVisible(false);
     setSelectedTrack(null);
   } catch (error: any) {
@@ -214,7 +214,7 @@ const handleDeleteTrack = async () => {
       <View style={styles.actionsContainer}>
         <TouchableOpacity
           onPress={() => setModalVisible(true)}
-          style={[styles.addButton, { backgroundColor: '#3b82f6' }]}
+          style={[styles.addButton, { backgroundColor: '#7e00fc' }]}
           activeOpacity={0.7}
         >
           <Ionicons name="add" size={20} color="#ffffff" />
@@ -341,7 +341,7 @@ const handleDeleteTrack = async () => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={handleAddTrack}
-                style={[styles.modalSave, { backgroundColor: '#3b82f6' }]}
+                style={[styles.modalSave, { backgroundColor: '#7e00fc' }]}
                 activeOpacity={0.7}
               >
                 <Text style={styles.modalSaveText}>Create</Text>
@@ -368,7 +368,7 @@ const handleDeleteTrack = async () => {
                 onPress={() => {
                   setEditModalVisible(false);
                   setSelectedTrack(null);
-                  setTrackForm({ name: '', color: '#3b82f6' });
+                  setTrackForm({ name: '', color: '#7e00fc' });
                 }}
                 style={styles.modalCloseButton}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
@@ -428,7 +428,7 @@ const handleDeleteTrack = async () => {
                 onPress={() => {
                   setEditModalVisible(false);
                   setSelectedTrack(null);
-                  setTrackForm({ name: '', color: '#3b82f6' });
+                  setTrackForm({ name: '', color: '#7e00fc' });
                 }}
                 style={[
                   styles.modalCancel, 
@@ -445,7 +445,7 @@ const handleDeleteTrack = async () => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={handleEditTrack}
-                style={[styles.modalSave, { backgroundColor: '#3b82f6' }]}
+                style={[styles.modalSave, { backgroundColor: '#7e00fc' }]}
                 activeOpacity={0.7}
               >
                 <Text style={styles.modalSaveText}>Save Changes</Text>

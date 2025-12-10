@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import * as Updates from "expo-updates";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import {
   Animated,
   StyleSheet,
@@ -10,15 +10,16 @@ import {
   StatusBar,
   Dimensions,
   Platform,
-  Alert
+  Alert,
 } from "react-native";
+import { ThemeContext } from "@/context/ThemeContext";
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 export default function SplashScreen() {
-  // -------------------------
-  // Animation refs
-  // -------------------------
+  const { dark } = useContext(ThemeContext);
+
+  // ------------------------- Animation refs -------------------------
   const fadeLogo = useRef(new Animated.Value(0)).current;
   const scaleLogo = useRef(new Animated.Value(0.8)).current;
   const rotateLogo = useRef(new Animated.Value(0)).current;
@@ -54,31 +55,24 @@ export default function SplashScreen() {
     ]);
   };
 
-  // -------------------------
-  // OTA Update + Navigation
-  // -------------------------
+  // ------------------------- OTA + Navigation -------------------------
   const checkOTAAndNavigate = async () => {
     try {
-      // Check OTA updates in production only
       if (!__DEV__) {
         const update = await Updates.checkForUpdateAsync();
         if (update.isAvailable) {
           await Updates.fetchUpdateAsync();
-          Alert.alert(
-            "Update Ready",
-            "Restart app to apply the update?",
-            [
-              { text: "Later", style: "cancel" },
-              { text: "Restart Now", onPress: () => Updates.reloadAsync() },
-            ]
-          );
-          return; // stop further navigation until update applied
+          Alert.alert("Update Ready", "Restart app to apply the update?", [
+            { text: "Later", style: "cancel" },
+            { text: "Restart Now", onPress: () => Updates.reloadAsync() },
+          ]);
+          return;
         }
       }
 
-      // Continue navigation logic
       const userdataAvailable = await AsyncStorage.getItem("userdataAvailable");
-      const delay = 2000; // minimum splash display
+      const delay = 2000;
+
       setTimeout(() => {
         if (userdataAvailable === "true") {
           router.replace("/(tabs)");
@@ -88,7 +82,7 @@ export default function SplashScreen() {
       }, delay);
     } catch (error) {
       console.error("SplashScreen OTA/Navigation error:", error);
-      // fallback navigation
+
       setTimeout(async () => {
         const userdataAvailable = await AsyncStorage.getItem("userdataAvailable");
         if (userdataAvailable === "true") {
@@ -100,11 +94,8 @@ export default function SplashScreen() {
     }
   };
 
-  // -------------------------
-  // useEffect for animations + OTA
-  // -------------------------
+  // ------------------------- useEffect -------------------------
   useEffect(() => {
-    // Gradient animation
     Animated.timing(gradientAnim, {
       toValue: 1,
       duration: 3000,
@@ -112,7 +103,6 @@ export default function SplashScreen() {
       easing: Easing.inOut(Easing.quad),
     }).start();
 
-    // Logo animations
     Animated.sequence([
       Animated.parallel([
         Animated.timing(fadeLogo, {
@@ -128,6 +118,7 @@ export default function SplashScreen() {
           useNativeDriver: true,
         }),
       ]),
+
       Animated.sequence([
         Animated.timing(scaleLogo, {
           toValue: 1,
@@ -154,7 +145,6 @@ export default function SplashScreen() {
       ]),
     ]).start();
 
-    // Text animations
     Animated.stagger(400, [
       Animated.parallel([
         Animated.timing(fadeTitle, {
@@ -178,47 +168,48 @@ export default function SplashScreen() {
       }),
     ]).start();
 
-    // Start particle animations
     createParticleAnimation(particleAnim1, 300).start();
     createParticleAnimation(particleAnim2, 600).start();
     createParticleAnimation(particleAnim3, 900).start();
 
-    // Run OTA + navigation after animations start
     const timeout = setTimeout(checkOTAAndNavigate, 1500);
 
     return () => {
       clearTimeout(timeout);
-      fadeLogo.stopAnimation();
-      scaleLogo.stopAnimation();
-      rotateLogo.stopAnimation();
-      fadeTitle.stopAnimation();
-      scaleTitle.stopAnimation();
-      fadeSubtitle.stopAnimation();
     };
   }, []);
 
-  // Gradient & rotation interpolation
+  // ------------------------- Interpolations -------------------------
   const gradientColor = gradientAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: ["rgba(255,255,255,0)", "rgba(249,250,251,1)"],
+    outputRange: dark
+      ? ["rgba(0,0,0,0)", "rgba(18,18,18,1)"]
+      : ["rgba(255,255,255,0)", "rgba(249,250,251,1)"],
   });
+
   const rotateInterpolate = rotateLogo.interpolate({
     inputRange: [0, 1],
     outputRange: ["-3deg", "3deg"],
   });
 
-  // -------------------------
-  // Render
-  // -------------------------
+  // ------------------------- Render -------------------------
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: dark ? "#121212" : "#ffffff" },
+      ]}
+    >
       <StatusBar
-        barStyle="dark-content"
-        backgroundColor="transparent"
         translucent
+        backgroundColor="transparent"
+        barStyle={dark ? "light-content" : "dark-content"}
       />
 
-      <Animated.View style={[styles.background, { backgroundColor: gradientColor }]} />
+      {/* Background */}
+      <Animated.View
+        style={[styles.background, { backgroundColor: gradientColor }]}
+      />
 
       {/* Particles */}
       <Animated.View
@@ -226,6 +217,9 @@ export default function SplashScreen() {
           styles.particle,
           styles.particle1,
           {
+            backgroundColor: dark
+              ? "rgba(255,255,255,0.05)"
+              : "rgba(59,130,246,0.1)",
             opacity: particleAnim1,
             transform: [
               {
@@ -238,11 +232,15 @@ export default function SplashScreen() {
           },
         ]}
       />
+
       <Animated.View
         style={[
           styles.particle,
           styles.particle2,
           {
+            backgroundColor: dark
+              ? "rgba(255,255,255,0.04)"
+              : "rgba(139,92,246,0.08)",
             opacity: particleAnim2,
             transform: [
               {
@@ -255,11 +253,15 @@ export default function SplashScreen() {
           },
         ]}
       />
+
       <Animated.View
         style={[
           styles.particle,
           styles.particle3,
           {
+            backgroundColor: dark
+              ? "rgba(255,255,255,0.04)"
+              : "rgba(16,185,129,0.08)",
             opacity: particleAnim3,
             transform: [
               {
@@ -273,20 +275,43 @@ export default function SplashScreen() {
         ]}
       />
 
+      {/* Content */}
       <View style={styles.content}>
         <Animated.Image
           source={require("@/assets/images/icon.png")}
           style={[
             styles.logo,
-            { opacity: fadeLogo, transform: [{ scale: scaleLogo }, { rotate: rotateInterpolate }] },
+            {
+              opacity: fadeLogo,
+              transform: [{ scale: scaleLogo }, { rotate: rotateInterpolate }],
+              shadowColor: dark ? "#000" : "#000",
+            },
           ]}
         />
 
         <View style={styles.textContainer}>
-          <Animated.Text style={[styles.title, { opacity: fadeTitle, transform: [{ scale: scaleTitle }] }]}>
+          <Animated.Text
+            style={[
+              styles.title,
+              {
+                opacity: fadeTitle,
+                transform: [{ scale: scaleTitle }],
+                color: dark ? "#f3f4f6" : "#1a1a1a",
+              },
+            ]}
+          >
             Snapshot Growth
           </Animated.Text>
-          <Animated.Text style={[styles.subtitle, { opacity: fadeSubtitle }]}>
+
+          <Animated.Text
+            style={[
+              styles.subtitle,
+              {
+                opacity: fadeSubtitle,
+                color: dark ? "#94a3b8" : "#666",
+              },
+            ]}
+          >
             Watch your every progress
           </Animated.Text>
         </View>
@@ -296,33 +321,44 @@ export default function SplashScreen() {
 }
 
 const styles = StyleSheet.create({
-  container:
-    { flex: 1, backgroundColor: "#ffffff", justifyContent: "center", alignItems: "center" },
-  background:
-  {
+  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  background: {
     position: "absolute",
-    width: "100%", height: "100%"
+    width: "100%",
+    height: "100%",
   },
-  content:
-    { alignItems: "center", paddingHorizontal: 40 },
+  content: { alignItems: "center", paddingHorizontal: 40 },
   logo: {
     width: 140,
     height: 140,
     resizeMode: "contain",
+    borderRadius: 8,
     marginBottom: 24,
     ...Platform.select({
-      ios: { shadowColor: "#000", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.1, shadowRadius: 12 },
+      ios: {
+        shadowColor: "#000",
+        shadowOpacity: 0.1,
+        shadowRadius: 12,
+        shadowOffset: { width: 0, height: 4 },
+      },
       android: { elevation: 8 },
     }),
   },
   textContainer: { alignItems: "center", marginTop: 8 },
-  title: { fontSize: 32, fontWeight: "800", color: "#1a1a1a", textAlign: "center", letterSpacing: -0.5, marginBottom: 8 },
-  subtitle: { fontSize: 16, fontWeight: "400", color: "#666", textAlign: "center", letterSpacing: 0.3, lineHeight: 22 },
-  particle: { position: "absolute", borderRadius: 50, backgroundColor: "rgba(59,130,246,0.1)" },
-  particle1: {
-    width: 120,
-    height: 120, top: "30%", left: "10%"
+  title: {
+    fontSize: 32,
+    fontWeight: "800",
+    letterSpacing: -0.5,
+    marginBottom: 8,
   },
-  particle2: { width: 80, height: 80, top: "60%", right: "15%", backgroundColor: "rgba(139,92,246,0.08)" },
-  particle3: { width: 60, height: 60, top: "20%", right: "20%", backgroundColor: "rgba(16,185,129,0.08)" },
+  subtitle: {
+    fontSize: 16,
+    fontWeight: "400",
+    letterSpacing: 0.3,
+    lineHeight: 22,
+  },
+  particle: { position: "absolute", borderRadius: 50 },
+  particle1: { width: 120, height: 120, top: "30%", left: "10%" },
+  particle2: { width: 80, height: 80, top: "60%", right: "15%" },
+  particle3: { width: 60, height: 60, top: "20%", right: "20%" },
 });

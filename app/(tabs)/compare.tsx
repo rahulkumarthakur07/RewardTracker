@@ -112,7 +112,7 @@ export default function ComparisonScreen() {
                 e.stopPropagation();
                 side === 'left' ? setModalVisibleLeft(true) : setModalVisibleRight(true);
               }}
-              style={[styles.addButtonSmall, { backgroundColor: side === 'left' ? '#4CAF50' : '#2196F3' }]}
+              style={[styles.addButtonSmall, { backgroundColor: side === 'left' ? '#4CAF50' : '#7e00fc' }]}
               activeOpacity={0.7}
             >
               <Ionicons name="add" size={24} color="#fff" />
@@ -172,7 +172,7 @@ export default function ComparisonScreen() {
                   {isSelected.date} • {isSelected.time}
                 </Text>
                 {isSelected.track && (
-                  <View style={[styles.trackBadge, { backgroundColor: tracks.find(t => t.name === isSelected.track)?.color || "#2196f3" }]}>
+                  <View style={[styles.trackBadge, { backgroundColor: tracks.find(t => t.name === isSelected.track)?.color || "#7e00fc" }]}>
                     <Text style={styles.trackBadgeText}>{isSelected.track}</Text>
                   </View>
                 )}
@@ -226,7 +226,7 @@ export default function ComparisonScreen() {
             </Text>
             {item.track && (
               <View style={[styles.modalTrackBadge, { 
-                backgroundColor: tracks.find(t => t.name === item.track)?.color || "#2196f3" 
+                backgroundColor: tracks.find(t => t.name === item.track)?.color || "#7e00fc" 
               }]}>
                 <Text style={styles.modalTrackBadgeText}>{item.track}</Text>
               </View>
@@ -236,7 +236,7 @@ export default function ComparisonScreen() {
         
         <TouchableOpacity
           onPress={() => onSelect(item)}
-          style={[styles.selectButton, { backgroundColor: side === 'left' ? '#4CAF50' : '#2196F3' }]}
+          style={[styles.selectButton, { backgroundColor: side === 'left' ? '#4CAF50' : '#7e00fc' }]}
           activeOpacity={0.7}
         >
           <Text style={styles.selectButtonText}>Select</Text>
@@ -384,7 +384,7 @@ case "splitView":
 
               {/* Right Details */}
               <View style={[styles.detailsCard, { backgroundColor: dark ? "#1a1a1a" : "#fff" }]}>
-                <View style={[styles.detailsHeader, { backgroundColor: rightTrack?.color || '#2196F3' }]}>
+                <View style={[styles.detailsHeader, { backgroundColor: rightTrack?.color || '#7e00fc' }]}>
                   <Text style={styles.detailsHeaderText}>Right Item Details</Text>
                 </View>
                 <View style={styles.detailsContent}>
@@ -464,10 +464,10 @@ case "splitView":
               styles.filterButton,
               {
                 backgroundColor: selectedTrack === "All" 
-                  ? "#2196f3" 
+                  ? "#7e00fc" 
                   : dark ? "#2a2a2a" : "#fff",
                 borderColor: selectedTrack === "All" 
-                  ? "#2196f3" 
+                  ? "#7e00fc" 
                   : dark ? "#444" : "#ddd",
               }
             ]}
@@ -581,7 +581,7 @@ case "splitView":
         {/* RIGHT COLUMN */}
         <View style={styles.column}>
           <View style={styles.columnHeader}>
-            <View style={[styles.columnIndicator, { backgroundColor: '#2196F3' }]} />
+            <View style={[styles.columnIndicator, { backgroundColor: '#7e00fc' }]} />
             <Text style={[styles.columnTitle, { color: dark ? "#fff" : "#333" }]}>
               Right Side
             </Text>
@@ -593,8 +593,8 @@ case "splitView":
             style={styles.addButton}
             activeOpacity={0.7}
           >
-            <Ionicons name="add-circle" size={24} color="#2196F3" />
-            <Text style={[styles.addButtonText, { color: '#2196F3' }]}>
+            <Ionicons name="add-circle" size={24} color="#7e00fc" />
+            <Text style={[styles.addButtonText, { color: '#7e00fc' }]}>
               {selectedRightItem ? 'Change Item' : 'Add Item'}
             </Text>
           </TouchableOpacity>
@@ -769,7 +769,7 @@ case "splitView":
                   styles.viewModeButton,
                   { 
                     backgroundColor: comparisonView === "sideBySide" 
-                      ? "#3b82f6" 
+                      ? "#7e00fc" 
                       : dark ? "#2a2a2a" : "#f1f5f9" 
                   }
                 ]}
@@ -794,7 +794,7 @@ case "splitView":
                   styles.viewModeButton,
                   { 
                     backgroundColor: comparisonView === "splitView" 
-                      ? "#3b82f6" 
+                      ? "#7e00fc" 
                       : dark ? "#2a2a2a" : "#f1f5f9" 
                   }
                 ]}
@@ -819,7 +819,7 @@ case "splitView":
                   styles.viewModeButton,
                   { 
                     backgroundColor: comparisonView === "details" 
-                      ? "#3b82f6" 
+                      ? "#7e00fc" 
                       : dark ? "#2a2a2a" : "#f1f5f9" 
                   }
                 ]}
@@ -1097,7 +1097,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#2196F3',
+    borderColor: '#7e00fc',
     marginVertical: 10,
   },
   vsText: {
